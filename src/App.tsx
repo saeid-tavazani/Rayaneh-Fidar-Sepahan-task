@@ -10,8 +10,11 @@ export default createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: '/products', element: <Products /> },
-      { path: '/products/:id', element: <ProductDetails /> },
+      { path: 'products', element: <Products /> },
+      { path: 'products/:id', element: <ProductDetails /> },
+      { path: 'blog', element: <Home /> },
+      { path: 'faq', element: <Home /> },
+      { path: 'contact-us', element: <Home /> },
     ],
   },
 ]);
