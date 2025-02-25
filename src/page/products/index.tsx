@@ -28,7 +28,7 @@ const Products = () => {
   if (error) return <p>{error.message} </p>;
 
   return (
-    <article className="container px-4 mx-auto grid grid-cols-8 gap-7 items-start">
+    <article className="container px-4 mx-auto grid grid-cols-8 gap-7 items-start mt-2.5">
       <Filters />
       <section className="col-span-8 md:col-span-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
         {isLoading && (
