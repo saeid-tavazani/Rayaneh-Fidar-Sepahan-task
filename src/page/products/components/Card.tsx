@@ -1,9 +1,10 @@
 import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 import clsx from 'clsx';
-import { CiHeart, CiShoppingCart } from 'react-icons/ci';
+import { CiHeart, CiShoppingCart, CiTrash } from 'react-icons/ci';
 import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
 import Button from '../../../components/Button';
+import { useCartContext } from '../../../context/CartContext';
 import { ProductType } from '../index';
 
 const COLORS = ['bg-secondary', 'bg-primary', 'bg-black', 'bg-error', 'bg-success', 'bg-white'];
@@ -14,6 +15,7 @@ const Card = ({ color, discount, id, image, model, price, title }: ProductType) 
   const randomRating = (Math.random() * 6).toFixed(1);
 
   const navigate = useNavigate();
+  const { addProductToCart, cartItems, removeProductFromCart } = useCartContext();
 
   return (
     <div
@@ -51,15 +53,29 @@ const Card = ({ color, discount, id, image, model, price, title }: ProductType) 
       </div>
 
       <div className="flex items-center justify-between absolute left-4 right-4 -bottom-1/2 group-hover:bottom-4 transition-all duration-200 bg-white">
-        <Button
-          onClick={e => {
-            e.stopPropagation();
-          }}
-          className="text-primary"
-        >
-          <CiShoppingCart size={24} />
-          <span>Add to cart</span>
-        </Button>
+        {cartItems.find(item => item.id == id) ? (
+          <Button
+            onClick={e => {
+              e.stopPropagation();
+              removeProductFromCart(id);
+            }}
+            className="text-error"
+          >
+            <CiTrash size={24} />
+          </Button>
+        ) : (
+          <Button
+            onClick={e => {
+              e.stopPropagation();
+              addProductToCart(id);
+            }}
+            className="text-primary"
+          >
+            <CiShoppingCart size={24} />
+            <span>Add to cart</span>
+          </Button>
+        )}
+
         <CiHeart size={24} className="cursor-pointer" />
       </div>
     </div>
