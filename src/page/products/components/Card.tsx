@@ -1,18 +1,17 @@
 import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 import clsx from 'clsx';
 import { CiHeart, CiShoppingCart, CiTrash } from 'react-icons/ci';
-import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
 import Button from '../../../components/Button';
 import { useCartContext } from '../../../context/CartContext';
 import { ProductType } from '../index';
+import ProductRating from './ProductRating';
 
 const COLORS = ['bg-secondary', 'bg-primary', 'bg-black', 'bg-error', 'bg-success', 'bg-white'];
 const getRandomColor = () => COLORS[Math.floor(Math.random() * COLORS.length)];
 
-const Card = ({ color, discount, id, image, model, price, title }: ProductType) => {
+const Card = ({ color, discount, id, model, price, title }: ProductType) => {
   const discountedPrice = discount ? price - (price * discount) / 100 : price;
-  const randomRating = (Math.random() * 6).toFixed(1);
 
   const navigate = useNavigate();
   const { addProductToCart, cartItems, removeProductFromCart } = useCartContext();
@@ -27,7 +26,7 @@ const Card = ({ color, discount, id, image, model, price, title }: ProductType) 
       )}
 
       <AspectRatio ratio={16 / 9} className="flex items-center">
-        <img src={image} alt={model} className="size-full object-cover" />
+        <img src="../imag.png" alt={model} className="size-full object-cover" />
       </AspectRatio>
 
       {color && (
@@ -47,9 +46,7 @@ const Card = ({ color, discount, id, image, model, price, title }: ProductType) 
           {discount && <span className="text-[10px] md:text-sm font-medium text-gray-70 line-through">${price}</span>}
           <span className="text-xs md:text-lg font-light">${discountedPrice}</span>
         </div>
-        <div className="text-primary-500 text-base font-medium gap-0.5 flex items-center">
-          <FaStar size={24} /> <span>{randomRating}</span>
-        </div>
+        <ProductRating className="text-primary-500" />
       </div>
 
       <div className="flex items-center justify-between absolute left-4 right-4 -bottom-1/2 group-hover:bottom-4 transition-all duration-200 bg-white">
