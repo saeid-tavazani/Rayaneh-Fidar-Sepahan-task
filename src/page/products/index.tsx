@@ -23,18 +23,47 @@ interface Products extends ResTypes {
   products: ProductType[];
 }
 
+type Params = {
+  page: number;
+  category: string | null;
+};
+
 const Products = () => {
-  const [page, setPage] = useState(1);
+  const [params, setParams] = useState<Params>({
+    page: 1,
+    category: null,
+  });
+
+  const handlePage = (page: number) => {
+    setParams(value => {
+      return { ...value, page };
+    });
+  };
+
+  const handleCategory = (category: string | null) => {
+    setParams(value => {
+      return { ...value, category };
+    });
+  };
+
+  const endpoint = params.category
+    ? { url: '/category', params: { type: params.category } }
+    : { url: '', params: { page: params.page, limit: 9 } };
+
+  console.log('====================================');
+  console.log(endpoint);
+  console.log('====================================');
+
   const { data, error, isLoading } = useQuery({
-    queryKey: ['products', page],
-    queryFn: () => getData<Products>('', { page, limit: 9 }),
+    queryKey: ['products', params],
+    queryFn: () => getData<Products>(endpoint.url, endpoint.params),
   });
 
   if (error) return <p>{error.message}</p>;
 
   return (
     <article className="container px-4 mx-auto grid grid-cols-8 gap-7 items-start mt-2.5">
-      <Filters />
+      <Filters handleCategory={handleCategory} category={params.category} />
       <section className="col-span-8 md:col-span-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
         {isLoading
           ? Array.from({ length: 9 }).map((_, index) => (
@@ -48,7 +77,7 @@ const Products = () => {
             ))
           : data?.products.map(item => <Card key={item.id} {...item} />)}
       </section>
-      <Pagination page={page} handlePage={setPage} totalPages={6} />
+      <Pagination page={params.page} handlePage={handlePage} totalPages={6} />
     </article>
   );
 };
