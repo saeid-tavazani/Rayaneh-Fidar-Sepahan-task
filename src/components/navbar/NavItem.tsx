@@ -3,13 +3,14 @@ import { NavLink, useLocation } from 'react-router';
 type PropType = {
   slug: string;
   text: string;
+  onClick?: () => void;
 };
 
-const NavItem = ({ slug, text }: PropType) => {
+const NavItem = ({ slug, text, onClick }: PropType) => {
   const { pathname } = useLocation();
   const activeLink = pathname === slug;
   return (
-    <motion.li className="text-lg font-light flex flex-col" key={slug}>
+    <motion.li onClick={onClick} className="text-lg font-light flex flex-col" key={slug}>
       <NavLink className={({ isActive }) => (isActive ? 'text-primary p-2' : 'p-2 transition-all duration-200')} to={slug}>
         {text}
       </NavLink>
