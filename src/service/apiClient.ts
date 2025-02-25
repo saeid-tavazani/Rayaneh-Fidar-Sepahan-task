@@ -12,8 +12,8 @@ export interface ResTypes {
   message: string;
 }
 
-const getData = <T>(endpoint: string): Promise<T> => {
-  return axiosInstance.get<T>(endpoint).then(res => res.data);
+const getData = <T>(endpoint: string, query?: object): Promise<T> => {
+  return axiosInstance.get<T>(endpoint, query ? { params: query } : undefined).then(res => res.data);
 };
 
 export { axiosInstance, getData };
