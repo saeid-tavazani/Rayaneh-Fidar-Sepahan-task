@@ -67,14 +67,15 @@ const Management = ({ categories, isLoading }: { categories?: string[]; isLoadin
       <span className="text-xl font-medium">Filters</span>
       <span className="text-base font-normal text-primary cursor-pointer">Clear all</span>
     </div>
-    {isLoading ? <SkeletonLoader /> : categories && <Category categories={categories} />}
+    {isLoading && <SkeletonLoader />}
+    {categories && <Category categories={categories} />}
   </>
 );
 
 const SkeletonLoader = () => (
-  <div className="flex flex-col gap-3 mt-6 *:w-full *:h-4">
+  <div className="flex flex-col gap-3 mt-6 ">
     {Array.from({ length: 5 }).map((_, index) => (
-      <Skeleton key={index} />
+      <Skeleton key={index} className="w-full h-4 bg-gray-60" />
     ))}
   </div>
 );
