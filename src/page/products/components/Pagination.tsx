@@ -29,7 +29,7 @@ const Pagination = ({ page, totalPages, handlePage }: Props) => {
         <FaArrowRightLong className="cursor-pointer rotate-180" onClick={() => handlePage(page - 1)} size={24} aria-label="Previous page" />
       )}
 
-      {visiblePages.map((item, index) => (
+      {visiblePages.map(item => (
         <button
           className={clsx(
             'size-[45px] flex items-center justify-center cursor-pointer transition-all hover:text-primary',
