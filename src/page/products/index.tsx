@@ -50,10 +50,6 @@ const Products = () => {
     ? { url: '/category', params: { type: params.category } }
     : { url: '', params: { page: params.page, limit: 9 } };
 
-  console.log('====================================');
-  console.log(endpoint);
-  console.log('====================================');
-
   const { data, error, isLoading } = useQuery({
     queryKey: ['products', params],
     queryFn: () => getData<Products>(endpoint.url, endpoint.params),
