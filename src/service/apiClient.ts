@@ -3,11 +3,14 @@ import Axios from 'axios';
 const axiosInstance = Axios.create({
   baseURL: 'https://fakestoreapi.in/api/products',
   headers: {
-    common: {
-      'Content-Type': 'application/json',
-    },
+    'Content-Type': 'application/json',
   },
 });
+
+export interface ResTypes {
+  status: 'BAD-REQUEST' | 'SUCCESS';
+  message: string;
+}
 
 const getData = <T>(endpoint: string): Promise<T> => {
   return axiosInstance.get<T>(endpoint).then(res => res.data);
