@@ -6,10 +6,10 @@ const MobileFooter = ({ contactInfo, footerLinks }: PropsType) => {
   return (
     <Accordion type="single" collapsible className="w-full flex flex-col gap-2">
       {footerLinks.map((section, idx) => (
-        <AccordionItem value={section.title}>
+        <AccordionItem key={idx} value={section.title}>
           <AccordionHeaderItem className="mb-2 font-medium text-white w-full">{section.title}</AccordionHeaderItem>
           <AccordionContent>
-            <ul key={idx} className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2">
               {section.links.map((link, index) => (
                 <li key={index}>
                   <Link to={link.slug}>{link.text}</Link>
