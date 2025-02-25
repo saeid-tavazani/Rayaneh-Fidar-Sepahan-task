@@ -31,7 +31,7 @@ const Card = ({ color, discount, id, image, model, price, title }: ProductType) 
       </AspectRatio>
 
       {color && (
-        <div className="flex flex-col gap-2 absolute right-0 top-1/4">
+        <div className="flex flex-col gap-2 absolute right-4 top-1/4">
           {[...Array(3)].map((_, index) => (
             <span key={index} className={clsx('size-3 border border-black rounded-full', getRandomColor())}></span>
           ))}
