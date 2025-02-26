@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import Skeleton from '../../components/skeleton';
+import Skeleton from '../../components/Skeleton';
 import { getData, ResTypes } from '../../service/apiClient';
 import Card from './components/Card';
 import Filters from './components/Filters';
