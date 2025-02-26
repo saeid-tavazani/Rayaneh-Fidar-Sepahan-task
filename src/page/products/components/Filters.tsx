@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from 'react';
 import { VscSettings } from 'react-icons/vsc';
 import { Accordion, AccordionContent, AccordionHeaderItem, AccordionItem } from '../../../components/Accordion';
 import Button from '../../../components/Button';
-import Skeleton from '../../../components/skeleton';
+import Skeleton from '../../../components/Skeleton';
 import useWindowResize from '../../../hook/useWindowResize';
 import { getData, ResTypes } from '../../../service/apiClient';
 
@@ -73,7 +73,7 @@ const MobileFilter = () => {
           >
             <div className="container px-4 mx-auto mt-5">
               <Management />
-              <Button onClick={() => setIsVisible(false)} className="text-primary mt-6 px-5">
+              <Button onClick={() => setIsVisible(false)} variant="outline" className="mt-6 px-5">
                 Close
               </Button>
             </div>

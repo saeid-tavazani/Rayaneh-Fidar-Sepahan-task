@@ -1,10 +1,10 @@
-import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 import clsx from 'clsx';
 import { CiHeart, CiShoppingCart, CiTrash } from 'react-icons/ci';
 import { useNavigate } from 'react-router';
 import Button from '../../../components/Button';
 import { useCartContext } from '../../../context/CartContext';
 import { ProductType } from '../index';
+import Image from './Image';
 import ProductRating from './ProductRating';
 
 const COLORS = ['bg-secondary', 'bg-primary', 'bg-black', 'bg-error', 'bg-success', 'bg-white'];
@@ -25,9 +25,7 @@ const Card = ({ color, discount, id, model, price, title }: ProductType) => {
         <div className="absolute bg-secondary-100 text-secondary-400 left-0 top-1 px-1.5 py-1 z-10 rounded-r-lg">-{discount}%</div>
       )}
 
-      <AspectRatio ratio={16 / 9} className="flex items-center">
-        <img src="../imag.png" alt={model} className="size-full object-cover" />
-      </AspectRatio>
+      <Image alt={model} />
 
       {color && (
         <div className="flex flex-col gap-2 absolute right-4 top-1/4">
@@ -56,7 +54,7 @@ const Card = ({ color, discount, id, model, price, title }: ProductType) => {
               e.stopPropagation();
               removeProductFromCart(id);
             }}
-            className="text-error"
+            variant="error"
           >
             <CiTrash size={24} />
           </Button>
@@ -66,7 +64,7 @@ const Card = ({ color, discount, id, model, price, title }: ProductType) => {
               e.stopPropagation();
               addProductToCart(id);
             }}
-            className="text-primary"
+            variant="outline"
           >
             <CiShoppingCart size={24} />
             <span>Add to cart</span>
