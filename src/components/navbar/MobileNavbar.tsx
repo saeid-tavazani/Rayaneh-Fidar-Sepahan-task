@@ -33,7 +33,7 @@ const MobileNavbar = ({ items }: { items: Prop[] }) => {
   }, [isMenuOpen]);
 
   return (
-    <div className="md:hidden">
+    <div className="*:md:hidden">
       <button ref={menuButtonRef} onClick={() => setIsMenuOpen(prev => !prev)}>
         <IoIosMenu className="cursor-pointer relative z-40" size={24} />
       </button>
